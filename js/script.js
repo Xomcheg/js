@@ -46,6 +46,15 @@ const personalMovieDb = {
     },
 
 
+
+    showMyDb: function () {
+        if (personalMovieDb.private) {
+            console.log(personalMovieDb);
+        }
+    },
+
+
+
     toggleVisibleMyDB: function () {
         if (personalMovieDb.private) {
             personalMovieDb.private = false;
@@ -55,24 +64,28 @@ const personalMovieDb = {
     },
 
 
-    showMyDb: function () {
-        if (personalMovieDb.private) {
-            console.log(personalMovieDb);
-        }
-    },
-
     writeYourGenres: function () {
-        for (let i = 1; i <= 2; i++) {
-            const genre = prompt(`Ваш любимый жанр под номером ${i}`);
+        for (let i = 1; i < 2; i++) {
+            // const genre = prompt(`Ваш любимый жанр под номером ${i}`);
 
-            if (genre == '' || genre == null) {
+            // if (genre == '' || genre == null) {
+            //     i--;
+            // } else {
+            //     personalMovieDb.genres[i - 1] = genre;
+            // }
+
+            let genres = prompt(`Введите ваши любимые жанры через запятую`);
+            if (genres == '' || genres == null) {
                 i--;
             } else {
-                personalMovieDb.genres[i - 1] = genre;
+                personalMovieDb.genres = genres.split(", "); 
+                // метод split превращает строку введенную пользоватьлем в массив, пользователь может ввести сколько угодно жанров
+                // ", " - показывает, что разделителем элементов является запятая
+                personalMovieDb.genres.sort();
             }
-        }
 
-        personalMovieDb.genres.forEach(function(item, i){
+        }
+        personalMovieDb.genres.forEach((item, i) => {
             console.log(`Любимый жанр ${i + 1} - это ${item}`);
         });
     }
@@ -81,15 +94,9 @@ const personalMovieDb = {
 
 
 
-// personalMovieDb.start();
-
 personalMovieDb.toggleVisibleMyDB();
 personalMovieDb.showMyDb();
-
-
 personalMovieDb.writeYourGenres();
-
-//
 
 
 
